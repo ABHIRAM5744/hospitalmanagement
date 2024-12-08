@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+{% load widget_tweaks %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>hospital nova || Abhi</title>
+  <style type="text/css">
+    body {
+      color: #aa082e;
+      font-family: 'Roboto', sans-serif;
+      background: url('https://media.istockphoto.com/id/2099357117/vector/heart-pulse-and-heartbeat-heartbeat-lone-cardiogram-beautiful-healthcare-medical-background.jpg?s=612x612&w=0&k=20&c=5agokqkO2Ls-JGCXC5eYl8mH_EO1ZnihZc-pEYtVBOI=') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    a:link {
+      text-decoration: none;
+    }
+
+    .note {
+      text-align: center;
+      height: 80px;
+      background: -webkit-linear-gradient(left, #0072ff, #8811c5);
+      color: #fff;
+      font-weight: bold;
+      line-height: 80px;
+    }
+
+    .form-content {
+      padding: 5%;
+      border: 1px solid #ced4da;
+      margin-bottom: 2%;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 15px;
+    }
+
+    .form-control {
+      border-radius: 1.5rem;
+    }
+
+    .btnSubmit {
+      border: none;
+      border-radius: 1.5rem;
+      padding: 1%;
+      width: 20%;
+      cursor: pointer;
+      background: #0062cc;
+      color: #fff;
+    }
+
+    .warning {
+      color: red;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+
+</head>
+
+<body>
+  {% include "hospital/navbar.html" %}
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <!--- signup page for admin by admin(Abhi)  ---------->
+
+  <form method="post" id="admin-form" onsubmit="return validateForm()">
+    {% csrf_token %}
+    <div class="container register-form">
+      <div class="form">
+        <div class="note">
+          <p>Add New Admin To Hospital</p>
+        </div>
+
+        <div class="form-content">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                {% render_field form.first_name class="form-control" placeholder="First Name(*)" required="required" id="first_name" %}
+              </div>
+              <div class="form-group">
+                {% render_field form.username class="form-control" placeholder="Username(*)" required="required" id="username" %}
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                {% render_field form.last_name class="form-control" placeholder="Last Name" id="last_name" %}
+              </div>
+              <div class="form-group">
+                {% render_field form.password class="form-control" placeholder="Password(*)" required="required" id="password" %}
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btnSubmit">Submit</button>
+          <p>This indicates that important to enter the details(*) </p>
+          <div class="text-center">Already have an account? <a href="adminlogin">Login here</a></div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <div id="warning-message" class="warning" style="display: none;">
+    Please fill in the required fields (First Name, Username, and Password).
+  </div>
+  <div id="invalid-characters-message" class="warning" style="display: none;">
+    The First Name and Last Name should not contain numbers or special characters.
+  </div>
+
+  {% include "hospital/footer.html" %}
+
+  <script>
+    // Validate form before submission
+    function validateForm() {
+      let firstName = document.getElementById("first_name").value;
+      let lastName = document.getElementById("last_name").value;
+      let username = document.getElementById("username").value;
+      let password = document.getElementById("password").value;
+      
+      // Regular expressions to allow only alphabets and spaces
+      let namePattern = /^[A-Za-z\s]+$/;
+
+      // Reset any previous error messages
+      document.getElementById("warning-message").style.display = "none";
+      document.getElementById("invalid-characters-message").style.display = "none";
+
+      // Check if any required field is empty
+      if (firstName === "" || username === "" || password === "") {
+        document.getElementById("warning-message").style.display = "block"; // Show warning message
+        return false; // Prevent form submission
+      }
+
+      // Check if first name and last name contain only alphabets and spaces
+      if (!namePattern.test(firstName) || !namePattern.test(lastName)) {
+        document.getElementById("invalid-characters-message").style.display = "block"; // Show invalid characters message
+        return false; // Prevent form submission
+      }
+
+      return true; // Proceed with form submission
+    }
+  </script>
+
+</body>
+
+</html>

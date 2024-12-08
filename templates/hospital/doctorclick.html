@@ -1,0 +1,38 @@
+{% extends 'hospital/homebase.html' %}
+<!--
+Developed By : Abhi Ram
+Facebook : fb.com/Abhi.luv
+YouTube : youtube.com/hospital novas
+-->
+
+{% block content %}
+
+<!-- Inline CSS for Background Image -->
+<style>
+  body {
+    background: url('https://media.istockphoto.com/id/2099357117/vector/heart-pulse-and-heartbeat-heartbeat-lone-cardiogram-beautiful-healthcare-medical-background.jpg?s=612x612&w=0&k=20&c=5agokqkO2Ls-JGCXC5eYl8mH_EO1ZnihZc-pEYtVBOI=') no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  .jumbotron {
+    background-color: rgba(255, 255, 255, 0.3); /* White with 30% transparency */
+    border-radius: 10px;
+    padding: 2rem;
+}
+</style>
+
+<br>
+<br>
+
+<div class="jumbotron" style="margin-bottom:200px;">
+  <h1 class="display-4" style="text-align:center;">Hello, Doctor</h1>
+  <p class="lead">Welcome to Hospital Management System.</p>
+  <hr class="my-4">
+  <p>You can access various features after Login/SignUp.</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="/doctorsignup" role="button">Apply</a>
+    <a class="btn btn-primary btn-lg" href="/doctorlogin" role="button">Login</a>
+  </p>
+</div>
+
+{% endblock content %}
